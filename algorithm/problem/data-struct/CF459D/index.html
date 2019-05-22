@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Codeforces,线段树,区间查询,单点查询,">
+  <meta name="keywords" content="Codeforces,线段树,区间查询,单点修改,树状数组,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目题意给出n个数和m次查询，每次查询给出l、r、x，要求返回一个l到r区间内不等于x的数字的位置">
-<meta name="keywords" content="Codeforces,线段树,区间查询,单点查询">
+<meta name="description" content="题目题意给定$n$个数字，要求找到满足如下条件的$(i,j)$点对的数量： 使区间$[1,i]$中$a_i$的数量大于区间$[j,n]$中$a_j$的数量$(1\le i&amp;lt;j\le n)$">
+<meta name="keywords" content="Codeforces,线段树,区间查询,单点修改,树状数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Codeforces622C - Not Equal on a Segment">
-<meta property="og:url" content="http://yoursite.com/algorithm/problem/data-struct/CF622C/index.html">
+<meta property="og:title" content="Codeforces459D - Pashmak and Parmida&#39;s problem">
+<meta property="og:url" content="http://yoursite.com/algorithm/problem/data-struct/CF459D/index.html">
 <meta property="og:site_name" content="沿着网线爬">
-<meta property="og:description" content="题目题意给出n个数和m次查询，每次查询给出l、r、x，要求返回一个l到r区间内不等于x的数字的位置">
+<meta property="og:description" content="题目题意给定$n$个数字，要求找到满足如下条件的$(i,j)$点对的数量： 使区间$[1,i]$中$a_i$的数量大于区间$[j,n]$中$a_j$的数量$(1\le i&amp;lt;j\le n)$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-16T12:19:28.017Z">
+<meta property="og:updated_time" content="2019-05-22T03:37:26.931Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Codeforces622C - Not Equal on a Segment">
-<meta name="twitter:description" content="题目题意给出n个数和m次查询，每次查询给出l、r、x，要求返回一个l到r区间内不等于x的数字的位置">
+<meta name="twitter:title" content="Codeforces459D - Pashmak and Parmida&#39;s problem">
+<meta name="twitter:description" content="题目题意给定$n$个数字，要求找到满足如下条件的$(i,j)$点对的数量： 使区间$[1,i]$中$a_i$的数量大于区间$[j,n]$中$a_j$的数量$(1\le i&amp;lt;j\le n)$">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/algorithm/problem/data-struct/CF622C/">
+  <link rel="canonical" href="http://yoursite.com/algorithm/problem/data-struct/CF459D/">
 
 
 
 
 
-  <title>Codeforces622C - Not Equal on a Segment | 沿着网线爬</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Codeforces459D - Pashmak and Parmida's problem | 沿着网线爬</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/algorithm/problem/data-struct/CF622C/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/algorithm/problem/data-struct/CF459D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiaofeng19">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Codeforces622C - Not Equal on a Segment</h1>
+          <h1 class="post-title" itemprop="name headline">Codeforces459D - Pashmak and Parmida's problem</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-15T19:02:00+08:00">
-                2019-05-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-22T11:20:23+08:00">
+                2019-05-22
               </time>
             
 
@@ -364,10 +364,11 @@
       
 
       
-        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="http://codeforces.com/problemset/problem/622/C" target="_blank" rel="noopener">题目</a></h3><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>给出n个数和m次查询，每次查询给出l、r、x，要求返回一个l到r区间内不等于x的数字的位置<br><a id="more"></a></p>
-<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>很明显的线段树，由于需要满足l到r范围和不等于x，所以需要先区间查询，满足区间则单点查询</p>
-<p>树结点的值取决于紫薯是否相等，若相等则等于子树，否则设为-1，进入单点查询阶段时只需要判断结点是否等于x就行了</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> paii pair<span class="meta-string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MK(a,b) make_pair(a,b)</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">200005</span>];</span><br><span class="line"><span class="keyword">int</span> sg[<span class="number">800005</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l==r)&#123;</span><br><span class="line">		sg[o]=a[l];</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid=(r-l)/<span class="number">2</span>+l;</span><br><span class="line">	build(o&lt;&lt;<span class="number">1</span>,l,mid);</span><br><span class="line">	build(o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r);</span><br><span class="line">	<span class="keyword">if</span> (sg[o&lt;&lt;<span class="number">1</span>]!=sg[o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>])</span><br><span class="line">		sg[o]=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		sg[o]=sg[o&lt;&lt;<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> L,<span class="keyword">int</span> R,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (sg[o]==v)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> mid=(r-l)/<span class="number">2</span>+l;</span><br><span class="line">	<span class="keyword">if</span> (L&lt;=l&amp;&amp;r&lt;=R)&#123;</span><br><span class="line">		<span class="keyword">if</span> (l==r)</span><br><span class="line">			<span class="keyword">return</span> l;</span><br><span class="line">		<span class="keyword">if</span> (sg[o&lt;&lt;<span class="number">1</span>]!=v)</span><br><span class="line">			<span class="keyword">return</span> query(o&lt;&lt;<span class="number">1</span>,l,mid,L,R,v);</span><br><span class="line">		<span class="keyword">return</span> query(o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,L,R,v);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">if</span> (L&lt;=mid)</span><br><span class="line">		ans=query(o&lt;&lt;<span class="number">1</span>,l,mid,L,R,v);</span><br><span class="line">	<span class="keyword">if</span> (ans==<span class="number">-1</span>&amp;&amp;R&gt;mid)</span><br><span class="line">		ans=query(o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,L,R,v);</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n,m;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">	build(<span class="number">1</span>,<span class="number">1</span>,n);</span><br><span class="line">	<span class="keyword">while</span> (m--)&#123;</span><br><span class="line">		<span class="keyword">int</span> l,r,x;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;l,&amp;r,&amp;x);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,query(<span class="number">1</span>,<span class="number">1</span>,n,l,r,x));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="http://codeforces.com/problemset/problem/459/D" target="_blank" rel="noopener">题目</a></h3><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>给定$n$个数字，要求找到满足如下条件的$(i,j)$点对的数量：</p>
+<p>使区间$[1,i]$中$a_i$的数量大于区间$[j,n]$中$a_j$的数量$(1\le i&lt;j\le n)$<br><a id="more"></a></p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>先从后往前扫，对于每一个$a_j$求出$[j,n]$范围内的数量$c_j$，统计$c_j$的数量并在此基础上建立线段树</p>
+<p>然后从前往后扫，同样统计出每一个$a_i$在$[1,i]$范围内的数量$b_i$，根据扫到的位置在线段树上维护当前位置$c_{i+1}-c_n$每个数的数量。由于要求$a_i$数量大于，所以每次在线段树上查询区间$[0,b_i-1]$的和就行</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> paii pair<span class="meta-string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MK(a,b) make_pair(a,b)</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1000005</span>],c[<span class="number">1000005</span>];</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;m;</span><br><span class="line"><span class="keyword">int</span> d[<span class="number">1000005</span>];</span><br><span class="line"><span class="keyword">int</span> sg[<span class="number">4000005</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> o)</span></span>&#123;</span><br><span class="line">	sg[o]=sg[o&lt;&lt;<span class="number">1</span>]+sg[o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l==r)&#123;</span><br><span class="line">		sg[o]=d[l];</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid=(r-l)/<span class="number">2</span>+l;</span><br><span class="line">	build(o&lt;&lt;<span class="number">1</span>,l,mid);</span><br><span class="line">	build(o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r);</span><br><span class="line">	pushup(o);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l==r)&#123;</span><br><span class="line">		sg[o]--;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid=(r-l)/<span class="number">2</span>+l;</span><br><span class="line">	<span class="keyword">if</span> (p&lt;=mid)</span><br><span class="line">		change(o&lt;&lt;<span class="number">1</span>,l,mid,p);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		change(o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,p);</span><br><span class="line">	pushup(o);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> L,<span class="keyword">int</span> R)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (L&lt;=l&amp;&amp;r&lt;=R)</span><br><span class="line">		<span class="keyword">return</span> sg[o];</span><br><span class="line">	<span class="keyword">int</span> mid=(r-l)/<span class="number">2</span>+l;</span><br><span class="line">	<span class="keyword">int</span> q=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (L&lt;=mid)</span><br><span class="line">		q+=query(o&lt;&lt;<span class="number">1</span>,l,mid,L,R);</span><br><span class="line">	<span class="keyword">if</span> (R&gt;mid)</span><br><span class="line">		q+=query(o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,L,R);</span><br><span class="line">	<span class="keyword">return</span> q;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	m.clear();</span><br><span class="line">	mem(c,<span class="number">0</span>);</span><br><span class="line">	mem(d,<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">	<span class="keyword">int</span> mx=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">if</span> (m.find(a[i])==m.end())</span><br><span class="line">			m[a[i]]=<span class="number">0</span>;</span><br><span class="line">		m[a[i]]++;</span><br><span class="line">		c[i]=m[a[i]];</span><br><span class="line">		mx=max(mx,c[i]);</span><br><span class="line">		d[c[i]]++;</span><br><span class="line">	&#125;</span><br><span class="line">	build(<span class="number">1</span>,<span class="number">0</span>,mx);</span><br><span class="line">	m.clear();</span><br><span class="line">	ll ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (m.find(a[i])==m.end())</span><br><span class="line">			m[a[i]]=<span class="number">0</span>;</span><br><span class="line">		m[a[i]]++;</span><br><span class="line">		<span class="keyword">int</span> b=m[a[i]];</span><br><span class="line">		change(<span class="number">1</span>,<span class="number">0</span>,mx,c[i]);</span><br><span class="line">		ans+=query(<span class="number">1</span>,<span class="number">0</span>,mx,<span class="number">0</span>,b<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -390,7 +391,9 @@
           
             <a href="/tags/check-interval/" rel="tag"># 区间查询</a>
           
-            <a href="/tags/check-point/" rel="tag"># 单点查询</a>
+            <a href="/tags/modify-point/" rel="tag"># 单点修改</a>
+          
+            <a href="/tags/Binary-Indexed-Tree/" rel="tag"># 树状数组</a>
           
         </div>
       
@@ -403,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/algorithm/problem/data-struct/CF1162A/" rel="next" title="Codeforces1162A - Zoning Restrictions Again">
-                <i class="fa fa-chevron-left"></i> Codeforces1162A - Zoning Restrictions Again
+              <a href="/algorithm/problem/data-struct/CF527C/" rel="next" title="Codeforces527C - Glass Carving">
+                <i class="fa fa-chevron-left"></i> Codeforces527C - Glass Carving
               </a>
             
           </div>
@@ -413,8 +416,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/algorithm/problem/binary-search/CF1165F/" rel="prev" title="Codeforces1165F2 - Microtransactions (hard version)">
-                Codeforces1165F2 - Microtransactions (hard version) <i class="fa fa-chevron-right"></i>
+              <a href="/algorithm/problem/dp/CF573B/" rel="prev" title="Codeforces573B - Bear and Blocks">
+                Codeforces573B - Bear and Blocks <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
