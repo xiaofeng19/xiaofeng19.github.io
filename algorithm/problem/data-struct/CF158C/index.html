@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="线段树,Codeforces,区间查询,单点修改,树状数组,">
+  <meta name="keywords" content="Codeforces,模拟,栈,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目题意给定$n$个数字，要求找到满足如下条件的$(i,j)$点对的数量： 使区间$[1,i]$中$a_i$的数量大于区间$[j,n]$中$a_j$的数量$(1\le i&amp;lt;j\le n)$">
-<meta name="keywords" content="线段树,Codeforces,区间查询,单点修改,树状数组">
+<meta name="description" content="题目题意">
+<meta name="keywords" content="Codeforces,模拟,栈">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Codeforces459D - Pashmak and Parmida&#39;s problem">
-<meta property="og:url" content="http://yoursite.com/algorithm/problem/data-struct/CF459D/index.html">
+<meta property="og:title" content="Codeforces158C - Cd and pwd commands">
+<meta property="og:url" content="http://yoursite.com/algorithm/problem/data-struct/CF158C/index.html">
 <meta property="og:site_name" content="沿着网线爬">
-<meta property="og:description" content="题目题意给定$n$个数字，要求找到满足如下条件的$(i,j)$点对的数量： 使区间$[1,i]$中$a_i$的数量大于区间$[j,n]$中$a_j$的数量$(1\le i&amp;lt;j\le n)$">
+<meta property="og:description" content="题目题意">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-22T03:37:26.931Z">
+<meta property="og:updated_time" content="2019-05-23T05:28:30.870Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Codeforces459D - Pashmak and Parmida&#39;s problem">
-<meta name="twitter:description" content="题目题意给定$n$个数字，要求找到满足如下条件的$(i,j)$点对的数量： 使区间$[1,i]$中$a_i$的数量大于区间$[j,n]$中$a_j$的数量$(1\le i&amp;lt;j\le n)$">
+<meta name="twitter:title" content="Codeforces158C - Cd and pwd commands">
+<meta name="twitter:description" content="题目题意">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/algorithm/problem/data-struct/CF459D/">
+  <link rel="canonical" href="http://yoursite.com/algorithm/problem/data-struct/CF158C/">
 
 
 
 
 
-  <title>Codeforces459D - Pashmak and Parmida's problem | 沿着网线爬</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Codeforces158C - Cd and pwd commands | 沿着网线爬</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/algorithm/problem/data-struct/CF459D/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/algorithm/problem/data-struct/CF158C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiaofeng19">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Codeforces459D - Pashmak and Parmida's problem</h1>
+          <h1 class="post-title" itemprop="name headline">Codeforces158C - Cd and pwd commands</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-22T11:20:23+08:00">
-                2019-05-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-23T13:25:38+08:00">
+                2019-05-23
               </time>
             
 
@@ -364,11 +364,8 @@
       
 
       
-        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="http://codeforces.com/problemset/problem/459/D" target="_blank" rel="noopener">题目</a></h3><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>给定$n$个数字，要求找到满足如下条件的$(i,j)$点对的数量：</p>
-<p>使区间$[1,i]$中$a_i$的数量大于区间$[j,n]$中$a_j$的数量$(1\le i&lt;j\le n)$<br><a id="more"></a></p>
-<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>先从后往前扫，对于每一个$a_j$求出$[j,n]$范围内的数量$c_j$，统计$c_j$的数量并在此基础上建立线段树</p>
-<p>然后从前往后扫，同样统计出每一个$a_i$在$[1,i]$范围内的数量$b_i$，根据扫到的位置在线段树上维护当前位置$c_{i+1}-c_n$每个数的数量。由于要求$a_i$数量大于，所以每次在线段树上查询区间$[0,b_i-1]$的和就行</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> paii pair<span class="meta-string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MK(a,b) make_pair(a,b)</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1000005</span>],c[<span class="number">1000005</span>];</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;m;</span><br><span class="line"><span class="keyword">int</span> d[<span class="number">1000005</span>];</span><br><span class="line"><span class="keyword">int</span> sg[<span class="number">4000005</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> o)</span></span>&#123;</span><br><span class="line">	sg[o]=sg[o&lt;&lt;<span class="number">1</span>]+sg[o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l==r)&#123;</span><br><span class="line">		sg[o]=d[l];</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid=(r-l)/<span class="number">2</span>+l;</span><br><span class="line">	build(o&lt;&lt;<span class="number">1</span>,l,mid);</span><br><span class="line">	build(o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r);</span><br><span class="line">	pushup(o);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l==r)&#123;</span><br><span class="line">		sg[o]--;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid=(r-l)/<span class="number">2</span>+l;</span><br><span class="line">	<span class="keyword">if</span> (p&lt;=mid)</span><br><span class="line">		change(o&lt;&lt;<span class="number">1</span>,l,mid,p);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		change(o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,p);</span><br><span class="line">	pushup(o);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> L,<span class="keyword">int</span> R)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (L&lt;=l&amp;&amp;r&lt;=R)</span><br><span class="line">		<span class="keyword">return</span> sg[o];</span><br><span class="line">	<span class="keyword">int</span> mid=(r-l)/<span class="number">2</span>+l;</span><br><span class="line">	<span class="keyword">int</span> q=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (L&lt;=mid)</span><br><span class="line">		q+=query(o&lt;&lt;<span class="number">1</span>,l,mid,L,R);</span><br><span class="line">	<span class="keyword">if</span> (R&gt;mid)</span><br><span class="line">		q+=query(o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,L,R);</span><br><span class="line">	<span class="keyword">return</span> q;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	m.clear();</span><br><span class="line">	mem(c,<span class="number">0</span>);</span><br><span class="line">	mem(d,<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">	<span class="keyword">int</span> mx=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">if</span> (m.find(a[i])==m.end())</span><br><span class="line">			m[a[i]]=<span class="number">0</span>;</span><br><span class="line">		m[a[i]]++;</span><br><span class="line">		c[i]=m[a[i]];</span><br><span class="line">		mx=max(mx,c[i]);</span><br><span class="line">		d[c[i]]++;</span><br><span class="line">	&#125;</span><br><span class="line">	build(<span class="number">1</span>,<span class="number">0</span>,mx);</span><br><span class="line">	m.clear();</span><br><span class="line">	ll ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (m.find(a[i])==m.end())</span><br><span class="line">			m[a[i]]=<span class="number">0</span>;</span><br><span class="line">		m[a[i]]++;</span><br><span class="line">		<span class="keyword">int</span> b=m[a[i]];</span><br><span class="line">		change(<span class="number">1</span>,<span class="number">0</span>,mx,c[i]);</span><br><span class="line">		ans+=query(<span class="number">1</span>,<span class="number">0</span>,mx,<span class="number">0</span>,b<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="http://codeforces.com/problemset/problem/158/C" target="_blank" rel="noopener">题目</a></h3><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><a id="more"></a>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> paii pair<span class="meta-string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MK(a,b) make_pair(a,b)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">QUEUE</span> &#123;</span></span><br><span class="line">	<span class="built_in">string</span> s[<span class="number">10005</span>];</span><br><span class="line">	<span class="keyword">int</span> top;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>&#123;</span><br><span class="line">		top=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="built_in">string</span> c)</span></span>&#123;</span><br><span class="line">		s[top++]=c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">		top=max(<span class="number">0</span>,top<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="built_in">string</span> <span class="title">get</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="built_in">string</span> ans=<span class="string">"/"</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;top;i++)&#123;</span><br><span class="line">			ans+=s[i];</span><br><span class="line">			ans+=<span class="string">"/"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> ans;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">QUEUE q;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	q.clear();</span><br><span class="line">	<span class="keyword">while</span> (n--)&#123;</span><br><span class="line">		<span class="built_in">string</span> s,c;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;c;</span><br><span class="line">		<span class="keyword">if</span> (c==<span class="string">"pwd"</span>)</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;q.get()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;s;</span><br><span class="line">			<span class="keyword">if</span> (s[<span class="number">0</span>]==<span class="string">'/'</span>)</span><br><span class="line">				q.clear();</span><br><span class="line">			c=<span class="string">""</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.size();i++)&#123;</span><br><span class="line">				<span class="keyword">if</span> (s[i]==<span class="string">'/'</span>)</span><br><span class="line">					<span class="keyword">continue</span>;</span><br><span class="line">				c+=s[i];</span><br><span class="line">				<span class="keyword">if</span> (i+<span class="number">1</span>&gt;=s.size()||s[i+<span class="number">1</span>]==<span class="string">'/'</span>)&#123;</span><br><span class="line">					<span class="keyword">if</span> (c==<span class="string">".."</span>)</span><br><span class="line">						q.pop();</span><br><span class="line">					<span class="keyword">else</span></span><br><span class="line">						q.push(c);</span><br><span class="line">					c=<span class="string">""</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -385,15 +382,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/segtree/" rel="tag"># 线段树</a>
-          
             <a href="/tags/Codeforces/" rel="tag"># Codeforces</a>
           
-            <a href="/tags/check-interval/" rel="tag"># 区间查询</a>
+            <a href="/tags/implementation/" rel="tag"># 模拟</a>
           
-            <a href="/tags/modify-point/" rel="tag"># 单点修改</a>
-          
-            <a href="/tags/Binary-Indexed-Tree/" rel="tag"># 树状数组</a>
+            <a href="/tags/stack/" rel="tag"># 栈</a>
           
         </div>
       
@@ -406,8 +399,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/algorithm/problem/data-struct/CF527C/" rel="next" title="Codeforces527C - Glass Carving">
-                <i class="fa fa-chevron-left"></i> Codeforces527C - Glass Carving
+              <a href="/algorithm/problem/dp/CF573B/" rel="next" title="Codeforces573B - Bear and Blocks">
+                <i class="fa fa-chevron-left"></i> Codeforces573B - Bear and Blocks
               </a>
             
           </div>
@@ -416,8 +409,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/algorithm/problem/dp/CF573B/" rel="prev" title="Codeforces573B - Bear and Blocks">
-                Codeforces573B - Bear and Blocks <i class="fa fa-chevron-right"></i>
+              <a href="/algorithm/problem/data-struct/CF1136E/" rel="prev" title="Codeforces1136E - Nastya Hasn't Written a Legend">
+                Codeforces1136E - Nastya Hasn't Written a Legend <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
