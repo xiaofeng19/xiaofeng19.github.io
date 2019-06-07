@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="线段树,树状数组,HBCPC,牛客,">
+  <meta name="keywords" content="Codeforces,贪心,前缀和,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目题意给一张二分图，求每条边与其他多少边相交">
-<meta name="keywords" content="线段树,树状数组,HBCPC,牛客">
+<meta name="description" content="题目题意给定一个长度为$n$的序列，要求将这个序列划分为$k$个区间，区间从左到右从1开始编号。该序列的总价值等于每个区间的区间和乘以该区间编号的和，求该序列的最大价值">
+<meta name="keywords" content="Codeforces,贪心,前缀和">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HBCPC2019E - Paper Plane Fly Away">
-<meta property="og:url" content="http://yoursite.com/algorithm/problem/data-struct/HBCPC2019E/index.html">
+<meta property="og:title" content="Codeforces1175D - Array Splitting">
+<meta property="og:url" content="http://yoursite.com/algorithm/problem/greedy/CF1175D/index.html">
 <meta property="og:site_name" content="沿着网线爬">
-<meta property="og:description" content="题目题意给一张二分图，求每条边与其他多少边相交">
+<meta property="og:description" content="题目题意给定一个长度为$n$的序列，要求将这个序列划分为$k$个区间，区间从左到右从1开始编号。该序列的总价值等于每个区间的区间和乘以该区间编号的和，求该序列的最大价值">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-28T10:31:00.150Z">
+<meta property="og:updated_time" content="2019-06-07T06:41:06.346Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HBCPC2019E - Paper Plane Fly Away">
-<meta name="twitter:description" content="题目题意给一张二分图，求每条边与其他多少边相交">
+<meta name="twitter:title" content="Codeforces1175D - Array Splitting">
+<meta name="twitter:description" content="题目题意给定一个长度为$n$的序列，要求将这个序列划分为$k$个区间，区间从左到右从1开始编号。该序列的总价值等于每个区间的区间和乘以该区间编号的和，求该序列的最大价值">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/algorithm/problem/data-struct/HBCPC2019E/">
+  <link rel="canonical" href="http://yoursite.com/algorithm/problem/greedy/CF1175D/">
 
 
 
 
 
-  <title>HBCPC2019E - Paper Plane Fly Away | 沿着网线爬</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Codeforces1175D - Array Splitting | 沿着网线爬</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/algorithm/problem/data-struct/HBCPC2019E/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/algorithm/problem/greedy/CF1175D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiaofeng19">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">HBCPC2019E - Paper Plane Fly Away</h1>
+          <h1 class="post-title" itemprop="name headline">Codeforces1175D - Array Splitting</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-25T17:17:01+08:00">
-                2019-05-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-07T14:30:39+08:00">
+                2019-06-07
               </time>
             
 
@@ -327,8 +327,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/problem/data-struct/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
+                  <a href="/categories/algorithm/problem/greedy/" itemprop="url" rel="index">
+                    <span itemprop="name">贪心</span>
                   </a>
                 </span>
 
@@ -364,10 +364,11 @@
       
 
       
-        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://ac.nowcoder.com/acm/contest/903/E" target="_blank" rel="noopener">题目</a></h3><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>给一张二分图，求每条边与其他多少边相交<br><a id="more"></a></p>
-<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>用$[l,r]$区间表示一条边，即可把问题转换为先按左端点排序求右端点的逆序数，然后按右端点排序求左端点的逆序数，然后相加</p>
-<p>比赛时可以用线段树写，赛后补题用开$4\times n$空间的线段树会被卡内存，改成树状数组就行。开$2\times n$空间的线段树我没试，大概也是可以的</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">100005</span>],b[<span class="number">100005</span>],ans[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> sg[<span class="number">100005</span>];</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;m;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x&amp;-x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (;o&lt;=n;o+=lowbit(o))</span><br><span class="line">        sg[o]+=v;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> o)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (;o&gt;<span class="number">0</span>;o-=lowbit(o))</span><br><span class="line">        ans+=sg[o];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> sum(r)-sum(l);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;ve;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ve.clear();</span><br><span class="line">    m.clear();</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a[i],&amp;b[i]);</span><br><span class="line">        m[a[i]]=i+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        ve.push_back(m[b[i]]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(sg,<span class="number">0</span>,<span class="keyword">sizeof</span>(sg));</span><br><span class="line">    <span class="built_in">memset</span>(ans,<span class="number">0</span>,<span class="keyword">sizeof</span>(ans));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ve.size();i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> p=ve[i];</span><br><span class="line">        ans[i+<span class="number">1</span>]+=query(p,n);</span><br><span class="line">        update(p,<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(sg,<span class="number">0</span>,<span class="keyword">sizeof</span>(sg));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=ve.size()<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">int</span> p=ve[i];</span><br><span class="line">        ans[i+<span class="number">1</span>]+=query(<span class="number">0</span>,p);</span><br><span class="line">        update(p,<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    solve();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="http://codeforces.com/contest/1175/problem/D" target="_blank" rel="noopener">题目</a></h3><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>给定一个长度为$n$的序列，要求将这个序列划分为$k$个区间，区间从左到右从1开始编号。该序列的总价值等于每个区间的区间和乘以该区间编号的和，求该序列的最大价值<br><a id="more"></a></p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>这道题其实可以转换成，将序列划分为$k$个右端点在最后位置的区间，序列总价值等于每个数乘以囊括了它的区间数的和。</p>
+<p>这样就可以求一个后缀和，除了第一个区间必须取到所有数字以外，其余区间选择一个后缀和最大的点作为区间左端点就行。</p>
+<p>序列的总价值就是这些后缀和的和</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> paii pair<span class="meta-string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MK(a,b) make_pair(a,b)</span></span><br><span class="line">ll a[<span class="number">300005</span>],b[<span class="number">300005</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(ll aa,ll bb)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> aa&gt;bb;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n,k;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]);</span><br><span class="line">	b[n]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">		b[i]=b[i+<span class="number">1</span>]+a[i];</span><br><span class="line">	sort(b+<span class="number">1</span>,b+n,cmp);</span><br><span class="line">	ll ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">		ans+=b[i];</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -384,13 +385,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/segtree/" rel="tag"># 线段树</a>
+            <a href="/tags/Codeforces/" rel="tag"># Codeforces</a>
           
-            <a href="/tags/Binary-Indexed-Tree/" rel="tag"># 树状数组</a>
+            <a href="/tags/greedy/" rel="tag"># 贪心</a>
           
-            <a href="/tags/HBCPC/" rel="tag"># HBCPC</a>
-          
-            <a href="/tags/Nowcoder/" rel="tag"># 牛客</a>
+            <a href="/tags/Prefix-Sum/" rel="tag"># 前缀和</a>
           
         </div>
       
@@ -403,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/algorithm/problem/data-struct/CF1136E/" rel="next" title="Codeforces1136E - Nastya Hasn't Written a Legend">
-                <i class="fa fa-chevron-left"></i> Codeforces1136E - Nastya Hasn't Written a Legend
+              <a href="/algorithm/problem/data-struct/CF920F/" rel="next" title="Codeforces920F - SUM and REPLACE">
+                <i class="fa fa-chevron-left"></i> Codeforces920F - SUM and REPLACE
               </a>
             
           </div>
@@ -412,10 +411,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/algorithm/problem/data-struct/POJ2104/" rel="prev" title="POJ2104 - K-th Number">
-                POJ2104 - K-th Number <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
