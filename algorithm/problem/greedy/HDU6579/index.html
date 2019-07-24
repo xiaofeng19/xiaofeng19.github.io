@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="贪心,线性基,HDUOJ,">
+  <meta name="keywords" content="贪心,可持久化,HDUOJ,线性基,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="题目题意给出一组初始数组$a_1$到$a_n$，对于之后的$m$次操作要求实现以下两种操作 1、给出$l$和$r$，要求输出在$[l,r]$区间内选取一些数取异或的最大值 2、给出$x$，要求在数组$a$的末尾加上一个数字$x$，同时$n$变成$n+1$">
-<meta name="keywords" content="贪心,线性基,HDUOJ">
+<meta name="keywords" content="贪心,可持久化,HDUOJ,线性基">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HDU6579 - Operation">
 <meta property="og:url" content="http://yoursite.com/algorithm/problem/greedy/HDU6579/index.html">
 <meta property="og:site_name" content="沿着网线爬">
 <meta property="og:description" content="题目题意给出一组初始数组$a_1$到$a_n$，对于之后的$m$次操作要求实现以下两种操作 1、给出$l$和$r$，要求输出在$[l,r]$区间内选取一些数取异或的最大值 2、给出$x$，要求在数组$a$的末尾加上一个数字$x$，同时$n$变成$n+1$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-24T09:43:44.713Z">
+<meta property="og:updated_time" content="2019-07-24T10:04:21.342Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HDU6579 - Operation">
 <meta name="twitter:description" content="题目题意给出一组初始数组$a_1$到$a_n$，对于之后的$m$次操作要求实现以下两种操作 1、给出$l$和$r$，要求输出在$[l,r]$区间内选取一些数取异或的最大值 2、给出$x$，要求在数组$a$的末尾加上一个数字$x$，同时$n$变成$n+1$">
@@ -368,7 +368,8 @@
 <p>1、给出$l$和$r$，要求输出在$[l,r]$区间内选取一些数取异或的最大值</p>
 <p>2、给出$x$，要求在数组$a$的末尾加上一个数字$x$，同时$n$变成$n+1$<br><a id="more"></a></p>
 <h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>贪心+线性基</p>
-<p>用线性基维护数组中每个数的前缀异或，同时将右边的数字放在线性基的高位上，在该位已经放了左边数字的情况下需要把左边数字往低位移动，同时记录相应位数的数字所对应的在数组中的位置</p>
+<p>用线性基维护数组中每个数的前缀异或（有点可持久化线性基的感觉。。。），同时将右边的数字放在线性基的高位上，在该位已经放了左边数字的情况下需要把左边数字往低位移动，同时记录相应位数的数字所对应的在数组中的位置</p>
+<p>时间复杂度为$\mathcal{O} (m\log n)$</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fi first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> se second</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MK(a,b) make_pair(a,b)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WN while (scanf(<span class="meta-string">"%d"</span>,&amp;n)!=EOF)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WT	int t;	\</span></span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);	\</span><br><span class="line">			<span class="keyword">while</span> (t--)</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLOSECIN	ios::sync_with_stdio(false);\</span></span><br><span class="line">					<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">1e6</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> a[maxn][<span class="number">35</span>],p[maxn][<span class="number">35</span>];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> pos)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> d=pos;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">30</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		a[d][i]=a[d<span class="number">-1</span>][i];</span><br><span class="line">		p[d][i]=p[d<span class="number">-1</span>][i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">30</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">if</span> ((x&gt;&gt;i)%<span class="number">2</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span> (!a[d][i])&#123;</span><br><span class="line">				a[d][i]=x;</span><br><span class="line">				p[d][i]=pos;</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (pos&gt;p[d][i])&#123;</span><br><span class="line">				swap(p[d][i],pos);</span><br><span class="line">				swap(a[d][i],x);</span><br><span class="line">			&#125;</span><br><span class="line">			x^=a[d][i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_max</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">30</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">if</span> (p[r][i]&gt;=l&amp;&amp;(a[r][i]^ans)&gt;ans)</span><br><span class="line">			ans^=a[r][i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> ca)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> m;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> x;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">		insert(x,i+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (m--)&#123;</span><br><span class="line">		<span class="keyword">int</span> op,l,r;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;op,&amp;l);</span><br><span class="line">		<span class="keyword">if</span> (op)</span><br><span class="line">			insert(l^ans,++n);</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;r);</span><br><span class="line">			l=(l^ans)%n+<span class="number">1</span>;</span><br><span class="line">			r=(r^ans)%n+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span> (l&gt;r)</span><br><span class="line">				swap(l,r);</span><br><span class="line">			ans=get_max(l,r);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	mem(a[<span class="number">0</span>],<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> ca=<span class="number">0</span>;</span><br><span class="line">	WT</span><br><span class="line">		solve(++ca);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -388,9 +389,11 @@
           
             <a href="/tags/greedy/" rel="tag"># 贪心</a>
           
-            <a href="/tags/basis/" rel="tag"># 线性基</a>
+            <a href="/tags/Persistability/" rel="tag"># 可持久化</a>
           
             <a href="/tags/HDUOJ/" rel="tag"># HDUOJ</a>
+          
+            <a href="/tags/linear-basis/" rel="tag"># 线性基</a>
           
         </div>
       
@@ -412,6 +415,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/algorithm/problem/data-struct/HDU6601/" rel="prev" title="HDU6601 - Keen On Everything But Triangle">
+                HDU6601 - Keen On Everything But Triangle <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -488,7 +495,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -510,7 +517,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
