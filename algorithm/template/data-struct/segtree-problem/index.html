@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="A题意一棵有$n$个节点的树，$Q$组询问，支持两种操作：  单点修改  路径求和   $1\le n,Q\le 10^5$ 解法数链剖分   DFS建出树的括号序列  $(1 (2 (3 )3 (4 (6 )6 (7 )7 )4 (5 )5 )2 )1$  建一棵线段树  $(\times 1,)\times -1$  求出$lca$  分别计算两段的和  把他们的绝对值加起来减掉$lca$">
+<meta name="description" content="A题意一棵有$n$个节点的树，$Q$组询问，支持两种操作：  单点修改 路径求和  $1\le n,Q\le 10^5$">
 <meta name="keywords" content="线段树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线段树题型小结">
 <meta property="og:url" content="http://yoursite.com/algorithm/template/data-struct/segtree-problem/index.html">
 <meta property="og:site_name" content="沿着网线爬">
-<meta property="og:description" content="A题意一棵有$n$个节点的树，$Q$组询问，支持两种操作：  单点修改  路径求和   $1\le n,Q\le 10^5$ 解法数链剖分   DFS建出树的括号序列  $(1 (2 (3 )3 (4 (6 )6 (7 )7 )4 (5 )5 )2 )1$  建一棵线段树  $(\times 1,)\times -1$  求出$lca$  分别计算两段的和  把他们的绝对值加起来减掉$lca$">
+<meta property="og:description" content="A题意一棵有$n$个节点的树，$Q$组询问，支持两种操作：  单点修改 路径求和  $1\le n,Q\le 10^5$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/algorithm/template/data-struct/segtree-problem/seg_p_1.png">
-<meta property="og:updated_time" content="2019-08-01T09:05:40.521Z">
+<meta property="og:updated_time" content="2019-08-02T05:04:41.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线段树题型小结">
-<meta name="twitter:description" content="A题意一棵有$n$个节点的树，$Q$组询问，支持两种操作：  单点修改  路径求和   $1\le n,Q\le 10^5$ 解法数链剖分   DFS建出树的括号序列  $(1 (2 (3 )3 (4 (6 )6 (7 )7 )4 (5 )5 )2 )1$  建一棵线段树  $(\times 1,)\times -1$  求出$lca$  分别计算两段的和  把他们的绝对值加起来减掉$lca$">
-<meta name="twitter:image" content="http://yoursite.com/algorithm/template/data-struct/segtree-problem/seg_p_1.png">
+<meta name="twitter:description" content="A题意一棵有$n$个节点的树，$Q$组询问，支持两种操作：  单点修改 路径求和  $1\le n,Q\le 10^5$">
 
 
 
@@ -366,33 +364,47 @@
       
 
       
-        <a id="more"></a>
-<h2 id="A"><a href="#A" class="headerlink" title="A"></a>A</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>一棵有$n$个节点的树，$Q$组询问，支持两种操作：</p>
+        <h2 id="A"><a href="#A" class="headerlink" title="A"></a>A</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>一棵有$n$个节点的树，$Q$组询问，支持两种操作：</p>
 <ol>
-<li><p>单点修改</p>
+<li>单点修改</li>
+<li>路径求和</li>
+</ol>
+<p>$1\le n,Q\le 10^5$<br><a id="more"></a></p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p><del>数链剖分</del></p>
+<ol>
+<li><p>DFS建出树的括号序列</p>
+<p> 如$(1 (2 (3 )3 (4 (6 )6 (7 )7 )4 (5 )5 )2 )1$</p>
 </li>
-<li><p>路径求和</p>
+<li><p>建一棵线段树</p>
+<p> $(\times 1,)\times -1$</p>
+</li>
+<li><p>求出$lca$</p>
+</li>
+<li>分别计算两段的和</li>
+<li>把他们的绝对值加起来减掉$lca$</li>
+</ol>
+<h2 id="B"><a href="#B" class="headerlink" title="B"></a>B</h2><h3 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h3><p>一个长度为$n$的序列$a$，$Q$次操作，两种类型：</p>
+<ol>
+<li>将$a_x$变成$v$</li>
+<li><p>询问区间$[l,r]$有多少段不同的数</p>
+<p> 例如2 2 2 3 1 1 4有四段</p>
 </li>
 </ol>
 <p>$1\le n,Q\le 10^5$</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p><del>数链剖分</del></p>
-<p><img src="./seg_p_1.png" alt></p>
+<h3 id="解法-1"><a href="#解法-1" class="headerlink" title="解法"></a>解法</h3><p>线段树的区间合并</p>
+<p>每个节点维护三个信息：</p>
 <ol>
-<li>DFS建出树的括号序列</li>
+<li>一共有多少段不同的数</li>
+<li>最左边的数</li>
+<li>最右边的数</li>
 </ol>
-<p>$(1 (2 (3 )3 (4 (6 )6 (7 )7 )4 (5 )5 )2 )1$</p>
-<ol start="2">
-<li>建一棵线段树</li>
+<h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><h3 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h3><p>一个长度为$n$的序列$a$，$Q$次操作，两种类型：</p>
+<ol>
+<li>区间$[l,r]$求和</li>
+<li>将区间$[l,r]$中所有数开根</li>
 </ol>
-<p>$(\times 1,)\times -1$</p>
-<ol start="3">
-<li><p>求出$lca$</p>
-</li>
-<li><p>分别计算两段的和</p>
-</li>
-<li><p>把他们的绝对值加起来减掉$lca$</p>
-</li>
-</ol>
+<p>$1\le n,Q\le 10^5$</p>
+<p>$0\le a_i\le 10^9$-</p>
 
       
     </div>
@@ -432,6 +444,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/algorithm/contest/Online/NEUQ2019-dataStruct/" rel="prev" title="NEUQ-ACM 2019集训 数据结构 题解">
+                NEUQ-ACM 2019集训 数据结构 题解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -508,7 +524,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -519,7 +535,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -563,7 +579,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A"><span class="nav-number">1.</span> <span class="nav-text">A</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意"><span class="nav-number">1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法"><span class="nav-number">1.2.</span> <span class="nav-text">解法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A"><span class="nav-number">1.</span> <span class="nav-text">A</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意"><span class="nav-number">1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法"><span class="nav-number">1.2.</span> <span class="nav-text">解法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B"><span class="nav-number">2.</span> <span class="nav-text">B</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意-1"><span class="nav-number">2.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法-1"><span class="nav-number">2.2.</span> <span class="nav-text">解法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C"><span class="nav-number">3.</span> <span class="nav-text">C</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意-2"><span class="nav-number">3.1.</span> <span class="nav-text">题意</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -656,9 +672,6 @@
 
 
 
-  
-  
-
 
 
 
@@ -696,16 +709,6 @@
   
   
     <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
   
 
 

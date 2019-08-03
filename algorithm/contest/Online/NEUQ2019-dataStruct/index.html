@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="A - 敌兵布阵 (HDU1166)题解线段树或树状数组单点更新+区间查询模板题 B - Balanced Lineup (POJ3264)题解线段树或树状数组区间查询模板题，同时维护最大最小两个值即可 C - Can you answer these queries? (HDU4027)题解因为每个点不需要多少次取根号操作就变成$1$了，所以只需要在修改操作时判断节点是否等于$r-l+1$，如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NEUQ-ACM 2019集训 数据结构 题解">
+<meta property="og:url" content="http://yoursite.com/algorithm/contest/Online/NEUQ2019-dataStruct/index.html">
+<meta property="og:site_name" content="沿着网线爬">
+<meta property="og:description" content="A - 敌兵布阵 (HDU1166)题解线段树或树状数组单点更新+区间查询模板题 B - Balanced Lineup (POJ3264)题解线段树或树状数组区间查询模板题，同时维护最大最小两个值即可 C - Can you answer these queries? (HDU4027)题解因为每个点不需要多少次取根号操作就变成$1$了，所以只需要在修改操作时判断节点是否等于$r-l+1$，如果">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/NEUQ2019-dataStruct-1.jpg">
+<meta property="og:updated_time" content="2019-08-03T04:15:37.295Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NEUQ-ACM 2019集训 数据结构 题解">
+<meta name="twitter:description" content="A - 敌兵布阵 (HDU1166)题解线段树或树状数组单点更新+区间查询模板题 B - Balanced Lineup (POJ3264)题解线段树或树状数组区间查询模板题，同时维护最大最小两个值即可 C - Can you answer these queries? (HDU4027)题解因为每个点不需要多少次取根号操作就变成$1$了，所以只需要在修改操作时判断节点是否等于$r-l+1$，如果">
+<meta name="twitter:image" content="http://yoursite.com/images/NEUQ2019-dataStruct-1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/algorithm/contest/Online/NEUQ2019-dataStruct/">
+
+
+
+
+
+  <title>NEUQ-ACM 2019集训 数据结构 题解 | 沿着网线爬</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">沿着网线爬</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/algorithm/contest/Online/NEUQ2019-dataStruct/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaofeng19">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="沿着网线爬">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NEUQ-ACM 2019集训 数据结构 题解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T11:27:26+08:00">
+                2019-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/contest/" itemprop="url" rel="index">
+                    <span itemprop="name">比赛</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/contest/Online/" itemprop="url" rel="index">
+                    <span itemprop="name">网络赛</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="A-敌兵布阵-HDU1166"><a href="#A-敌兵布阵-HDU1166" class="headerlink" title="A - 敌兵布阵 (HDU1166)"></a>A - 敌兵布阵 <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1166" target="_blank" rel="noopener">(HDU1166)</a></h2><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>线段树或树状数组单点更新+区间查询模板题</p>
+<h2 id="B-Balanced-Lineup-POJ3264"><a href="#B-Balanced-Lineup-POJ3264" class="headerlink" title="B - Balanced Lineup (POJ3264)"></a>B - Balanced Lineup <a href="http://poj.org/problem?id=3264" target="_blank" rel="noopener">(POJ3264)</a></h2><h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><p>线段树或树状数组区间查询模板题，同时维护最大最小两个值即可</p>
+<h2 id="C-Can-you-answer-these-queries-HDU4027"><a href="#C-Can-you-answer-these-queries-HDU4027" class="headerlink" title="C - Can you answer these queries? (HDU4027)"></a>C - Can you answer these queries? <a href="http://acm.hdu.edu.cn/showproblem.php?pid=4027" target="_blank" rel="noopener">(HDU4027)</a></h2><h3 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h3><p>因为每个点不需要多少次取根号操作就变成$1$了，所以只需要在修改操作时判断节点是否等于$r-l+1$，如果等于则不需要再次进行修改，不等于则向下单点修改</p>
+<h2 id="D-Minimum-Inversion-Number-HDU1394"><a href="#D-Minimum-Inversion-Number-HDU1394" class="headerlink" title="D - Minimum Inversion Number (HDU1394)"></a>D - Minimum Inversion Number <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1394" target="_blank" rel="noopener">(HDU1394)</a></h2><h3 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h3><p>实际上就是求逆序对个数，利用权值线段树或树状数组，每次读取一个数就从线段树里查询比它大的数的个数，查询完毕之后加入线段树中</p>
+<p>也可以用归并排序求逆序对</p>
+<h2 id="E-Knight-Tournament-Codeforces356A"><a href="#E-Knight-Tournament-Codeforces356A" class="headerlink" title="E - Knight Tournament (Codeforces356A)"></a>E - Knight Tournament <a href="http://codeforces.com/problemset/problem/356/A" target="_blank" rel="noopener">(Codeforces356A)</a></h2><h3 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h3><p>思维+线段树</p>
+<p>详细题解：<a href="https://xiaofeng19.github.io/algorithm/problem/data-struct/CF356A/" target="_blank" rel="noopener">Codeforces356A - Knight Tournament</a></p>
+<h2 id="F-Who-Gets-the-Most-Candies-POJ2886"><a href="#F-Who-Gets-the-Most-Candies-POJ2886" class="headerlink" title="F - Who Gets the Most Candies? (POJ2886)"></a>F - Who Gets the Most Candies? <a href="http://poj.org/problem?id=2886" target="_blank" rel="noopener">(POJ2886)</a></h2><h3 id="题解-5"><a href="#题解-5" class="headerlink" title="题解"></a>题解</h3><p>利用权值线段树或树状数组，初始叶子节点全赋值为1，线段树查询找这一轮应该离开的人的位置，并就将对应位置改成0</p>
+<h2 id="G-Mayor’s-posters-POJ2528"><a href="#G-Mayor’s-posters-POJ2528" class="headerlink" title="G - Mayor’s posters (POJ2528)"></a>G - Mayor’s posters <a href="http://poj.org/problem?id=2528" target="_blank" rel="noopener">(POJ2528)</a></h2><h3 id="题解-6"><a href="#题解-6" class="headerlink" title="题解"></a>题解</h3><p>线段树区间覆盖+离散化</p>
+<p>正常来讲应该是要考虑下面这种情况的：</p>
+<p><img src="/images/NEUQ2019-dataStruct-1.jpg" alt></p>
+<p>即不能只对给定的坐标建立离散化，否则按图中例子，4后面就直接接7，导致程序认为5、6直接没有海报</p>
+<p>不过这道题的数据里面并没有出现这种情况</p>
+<h2 id="H-Help-with-Intervals-POJ3225"><a href="#H-Help-with-Intervals-POJ3225" class="headerlink" title="H - Help with Intervals (POJ3225)"></a>H - Help with Intervals <a href="http://poj.org/problem?id=3225" target="_blank" rel="noopener">(POJ3225)</a></h2><h3 id="题解-7"><a href="#题解-7" class="headerlink" title="题解"></a>题解</h3><p>线段树区间修改+区间查询</p>
+<p>注意需要处理开闭区间的情况</p>
+<h2 id="I-Por-Costel-and-the-Alien-Invasion-Gym100923F"><a href="#I-Por-Costel-and-the-Alien-Invasion-Gym100923F" class="headerlink" title="I - Por Costel and the Alien Invasion (Gym100923F)"></a>I - Por Costel and the Alien Invasion <a href="http://codeforces.com/gym/100923/problem/F" target="_blank" rel="noopener">(Gym100923F)</a></h2><h3 id="题解-8"><a href="#题解-8" class="headerlink" title="题解"></a>题解</h3><p>线段树区间覆盖+单点查询</p>
+<p>因为是单点查询，所以其实不需要pushdown，在查询过程中对每条路径的最小值取最小值即可</p>
+<p>可以利用vector作为节点，每次插入对插入值和节点最小值取最小值插入到vector末尾，删除时直接删除相应节点的末尾，查询也只用查询路径节点的末尾值就可以了</p>
+<h2 id="J-Glass-Carving-Codeforces527C"><a href="#J-Glass-Carving-Codeforces527C" class="headerlink" title="J - Glass Carving (Codeforces527C)"></a>J - Glass Carving <a href="http://codeforces.com/problemset/problem/527/C" target="_blank" rel="noopener">(Codeforces527C)</a></h2><h3 id="题解-9"><a href="#题解-9" class="headerlink" title="题解"></a>题解</h3><p>两棵线段树维护长宽</p>
+<p>详细题解：<a href="https://xiaofeng19.github.io/algorithm/problem/data-struct/CF527C/" target="_blank" rel="noopener">Codeforces527C - Glass Carving</a></p>
+<h2 id="K-LCIS-HDU3308"><a href="#K-LCIS-HDU3308" class="headerlink" title="K - LCIS (HDU3308)"></a>K - LCIS <a href="http://acm.hdu.edu.cn/showproblem.php?pid=3308" target="_blank" rel="noopener">(HDU3308)</a></h2><h3 id="题解-10"><a href="#题解-10" class="headerlink" title="题解"></a>题解</h3><p>线段树区间合并</p>
+<h2 id="L-News-Distribution-Codeforces1167C"><a href="#L-News-Distribution-Codeforces1167C" class="headerlink" title="L - News Distribution (Codeforces1167C)"></a>L - News Distribution <a href="http://codeforces.com/problemset/problem/1167/C" target="_blank" rel="noopener">(Codeforces1167C)</a></h2><h3 id="题解-11"><a href="#题解-11" class="headerlink" title="题解"></a>题解</h3><p>并查集模板题</p>
+<h2 id="M-Farm-Irrigation-HDU1198"><a href="#M-Farm-Irrigation-HDU1198" class="headerlink" title="M - Farm Irrigation (HDU1198)"></a>M - Farm Irrigation <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1198" target="_blank" rel="noopener">(HDU1198)</a></h2><h3 id="题解-12"><a href="#题解-12" class="headerlink" title="题解"></a>题解</h3><p>并查集</p>
+<h2 id="N-Problem-A-Ascending-Rating-HDU6319"><a href="#N-Problem-A-Ascending-Rating-HDU6319" class="headerlink" title="N - Problem A. Ascending Rating (HDU6319)"></a>N - Problem A. Ascending Rating <a href="http://acm.hdu.edu.cn/showproblem.php?pid=6319" target="_blank" rel="noopener">(HDU6319)</a></h2><h3 id="题解-13"><a href="#题解-13" class="headerlink" title="题解"></a>题解</h3><p>单调队列</p>
+<h2 id="O-Finding-Hotels-HDU5992"><a href="#O-Finding-Hotels-HDU5992" class="headerlink" title="O - Finding Hotels (HDU5992)"></a>O - Finding Hotels <a href="http://acm.hdu.edu.cn/showproblem.php?pid=5992" target="_blank" rel="noopener">(HDU5992)</a></h2><h3 id="题解-14"><a href="#题解-14" class="headerlink" title="题解"></a>题解</h3><p>K-D树</p>
+<h2 id="P-XOR-HUD3949"><a href="#P-XOR-HUD3949" class="headerlink" title="P - XOR (HUD3949)"></a>P - XOR <a href="http://acm.hdu.edu.cn/showproblem.php?pid=3949" target="_blank" rel="noopener">(HUD3949)</a></h2><h3 id="题解-15"><a href="#题解-15" class="headerlink" title="题解"></a>题解</h3><p>线性基模板题</p>
+<h2 id="Q-Operation-HDU6579"><a href="#Q-Operation-HDU6579" class="headerlink" title="Q - Operation (HDU6579)"></a>Q - Operation <a href="http://acm.hdu.edu.cn/showproblem.php?pid=6579" target="_blank" rel="noopener">(HDU6579)</a></h2><h3 id="题解-16"><a href="#题解-16" class="headerlink" title="题解"></a>题解</h3><p>贪心+线性基</p>
+<h2 id="R-Keen-On-Everything-But-Triangle-HDU6601"><a href="#R-Keen-On-Everything-But-Triangle-HDU6601" class="headerlink" title="R - Keen On Everything But Triangle (HDU6601)"></a>R - Keen On Everything But Triangle <a href="http://acm.hdu.edu.cn/showproblem.php?pid=6601" target="_blank" rel="noopener">(HDU6601)</a></h2><h3 id="题解-17"><a href="#题解-17" class="headerlink" title="题解"></a>题解</h3><p>主席树模板题</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/algorithm/template/data-struct/segtree-problem/" rel="next" title="线段树题型小结">
+                <i class="fa fa-chevron-left"></i> 线段树题型小结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xiaofeng19</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-敌兵布阵-HDU1166"><span class="nav-number">1.</span> <span class="nav-text">A - 敌兵布阵 (HDU1166)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">1.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-Balanced-Lineup-POJ3264"><span class="nav-number">2.</span> <span class="nav-text">B - Balanced Lineup (POJ3264)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-1"><span class="nav-number">2.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-Can-you-answer-these-queries-HDU4027"><span class="nav-number">3.</span> <span class="nav-text">C - Can you answer these queries? (HDU4027)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-2"><span class="nav-number">3.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D-Minimum-Inversion-Number-HDU1394"><span class="nav-number">4.</span> <span class="nav-text">D - Minimum Inversion Number (HDU1394)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-3"><span class="nav-number">4.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-Knight-Tournament-Codeforces356A"><span class="nav-number">5.</span> <span class="nav-text">E - Knight Tournament (Codeforces356A)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-4"><span class="nav-number">5.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-Who-Gets-the-Most-Candies-POJ2886"><span class="nav-number">6.</span> <span class="nav-text">F - Who Gets the Most Candies? (POJ2886)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-5"><span class="nav-number">6.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-Mayor’s-posters-POJ2528"><span class="nav-number">7.</span> <span class="nav-text">G - Mayor’s posters (POJ2528)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-6"><span class="nav-number">7.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#H-Help-with-Intervals-POJ3225"><span class="nav-number">8.</span> <span class="nav-text">H - Help with Intervals (POJ3225)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-7"><span class="nav-number">8.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-Por-Costel-and-the-Alien-Invasion-Gym100923F"><span class="nav-number">9.</span> <span class="nav-text">I - Por Costel and the Alien Invasion (Gym100923F)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-8"><span class="nav-number">9.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J-Glass-Carving-Codeforces527C"><span class="nav-number">10.</span> <span class="nav-text">J - Glass Carving (Codeforces527C)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-9"><span class="nav-number">10.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K-LCIS-HDU3308"><span class="nav-number">11.</span> <span class="nav-text">K - LCIS (HDU3308)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-10"><span class="nav-number">11.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L-News-Distribution-Codeforces1167C"><span class="nav-number">12.</span> <span class="nav-text">L - News Distribution (Codeforces1167C)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-11"><span class="nav-number">12.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#M-Farm-Irrigation-HDU1198"><span class="nav-number">13.</span> <span class="nav-text">M - Farm Irrigation (HDU1198)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-12"><span class="nav-number">13.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#N-Problem-A-Ascending-Rating-HDU6319"><span class="nav-number">14.</span> <span class="nav-text">N - Problem A. Ascending Rating (HDU6319)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-13"><span class="nav-number">14.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-Finding-Hotels-HDU5992"><span class="nav-number">15.</span> <span class="nav-text">O - Finding Hotels (HDU5992)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-14"><span class="nav-number">15.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P-XOR-HUD3949"><span class="nav-number">16.</span> <span class="nav-text">P - XOR (HUD3949)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-15"><span class="nav-number">16.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-Operation-HDU6579"><span class="nav-number">17.</span> <span class="nav-text">Q - Operation (HDU6579)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-16"><span class="nav-number">17.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R-Keen-On-Everything-But-Triangle-HDU6601"><span class="nav-number">18.</span> <span class="nav-text">R - Keen On Everything But Triangle (HDU6601)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-17"><span class="nav-number">18.1.</span> <span class="nav-text">题解</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaofeng19</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src>
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
