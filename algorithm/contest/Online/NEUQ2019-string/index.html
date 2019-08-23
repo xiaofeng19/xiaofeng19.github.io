@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="NEUQ-ACM 2019集训 字符串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NEUQ-ACM 2019集训 字符串 题解">
+<meta property="og:url" content="http://yoursite.com/algorithm/contest/Online/NEUQ2019-string/index.html">
+<meta property="og:site_name" content="沿着网线爬">
+<meta property="og:description" content="NEUQ-ACM 2019集训 字符串">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-13T07:41:15.857Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NEUQ-ACM 2019集训 字符串 题解">
+<meta name="twitter:description" content="NEUQ-ACM 2019集训 字符串">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/algorithm/contest/Online/NEUQ2019-string/">
+
+
+
+
+
+  <title>NEUQ-ACM 2019集训 字符串 题解 | 沿着网线爬</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">沿着网线爬</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/algorithm/contest/Online/NEUQ2019-string/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaofeng19">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="沿着网线爬">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NEUQ-ACM 2019集训 字符串 题解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T15:27:53+08:00">
+                2019-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/contest/" itemprop="url" rel="index">
+                    <span itemprop="name">比赛</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/contest/Online/" itemprop="url" rel="index">
+                    <span itemprop="name">网络赛</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://vjudge.net/contest/316098" target="_blank" rel="noopener">NEUQ-ACM 2019集训 字符串</a></p>
+<a id="more"></a>
+<h2 id="A-Median-String-Codeforces1144E"><a href="#A-Median-String-Codeforces1144E" class="headerlink" title="A - Median String (Codeforces1144E)"></a>A - Median String <a href="http://codeforces.com/problemset/problem/1144/E" target="_blank" rel="noopener">(Codeforces1144E)</a></h2><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><h2 id="B-Different-is-Good-Codeforces672B"><a href="#B-Different-is-Good-Codeforces672B" class="headerlink" title="B - Different is Good (Codeforces672B)"></a>B - Different is Good <a href="http://codeforces.com/problemset/problem/672/B" target="_blank" rel="noopener">(Codeforces672B)</a></h2><h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><h2 id="C-Ostap-and-Grasshopper-Codeforces735A"><a href="#C-Ostap-and-Grasshopper-Codeforces735A" class="headerlink" title="C - Ostap and Grasshopper (Codeforces735A)"></a>C - Ostap and Grasshopper <a href="http://codeforces.com/problemset/problem/735/A" target="_blank" rel="noopener">(Codeforces735A)</a></h2><h3 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h3><h2 id="D-Queries-on-a-String-Codeforces598B"><a href="#D-Queries-on-a-String-Codeforces598B" class="headerlink" title="D - Queries on a String (Codeforces598B)"></a>D - Queries on a String <a href="http://codeforces.com/problemset/problem/598/B" target="_blank" rel="noopener">(Codeforces598B)</a></h2><h3 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h3><h2 id="E-Comparing-Two-Long-Integers-Codeforces616A"><a href="#E-Comparing-Two-Long-Integers-Codeforces616A" class="headerlink" title="E - Comparing Two Long Integers (Codeforces616A)"></a>E - Comparing Two Long Integers <a href="http://codeforces.com/problemset/problem/616/A" target="_blank" rel="noopener">(Codeforces616A)</a></h2><h3 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h3><h2 id="F-Vasiliy’s-Multiset-Codeforces706D"><a href="#F-Vasiliy’s-Multiset-Codeforces706D" class="headerlink" title="F - Vasiliy’s Multiset (Codeforces706D)"></a>F - Vasiliy’s Multiset <a href="http://codeforces.com/problemset/problem/706/D" target="_blank" rel="noopener">(Codeforces706D)</a></h2><h3 id="题解-5"><a href="#题解-5" class="headerlink" title="题解"></a>题解</h3><p>01字典树</p>
+<h2 id="G-最长回文-HDU3068"><a href="#G-最长回文-HDU3068" class="headerlink" title="G - 最长回文 (HDU3068)"></a>G - 最长回文 <a href="http://acm.hdu.edu.cn/showproblem.php?pid=3068" target="_blank" rel="noopener">(HDU3068)</a></h2><h3 id="题解-6"><a href="#题解-6" class="headerlink" title="题解"></a>题解</h3><p>Manacher模板题</p>
+<h2 id="H-Girls’-research-HDU3294"><a href="#H-Girls’-research-HDU3294" class="headerlink" title="H - Girls’ research (HDU3294)"></a>H - Girls’ research <a href="http://acm.hdu.edu.cn/showproblem.php?pid=3294" target="_blank" rel="noopener">(HDU3294)</a></h2><h3 id="题解-7"><a href="#题解-7" class="headerlink" title="题解"></a>题解</h3><p>Manacher</p>
+<h2 id="I-Palindrome-Degree-Codeforces7D"><a href="#I-Palindrome-Degree-Codeforces7D" class="headerlink" title="I - Palindrome Degree (Codeforces7D)"></a>I - Palindrome Degree <a href="http://codeforces.com/problemset/problem/7/D" target="_blank" rel="noopener">(Codeforces7D)</a></h2><h3 id="题解-8"><a href="#题解-8" class="headerlink" title="题解"></a>题解</h3><p>hash+dp</p>
+<h2 id="J-Petr-Codeforces113B"><a href="#J-Petr-Codeforces113B" class="headerlink" title="J - Petr# (Codeforces113B)"></a>J - Petr# <a href="http://codeforces.com/problemset/problem/113/B" target="_blank" rel="noopener">(Codeforces113B)</a></h2><h3 id="题解-9"><a href="#题解-9" class="headerlink" title="题解"></a>题解</h3><p>hash</p>
+<h2 id="K-Om-Nom-and-Necklace-Codeforces526D"><a href="#K-Om-Nom-and-Necklace-Codeforces526D" class="headerlink" title="K - Om Nom and Necklace (Codeforces526D)"></a>K - Om Nom and Necklace <a href="http://codeforces.com/problemset/problem/526/D" target="_blank" rel="noopener">(Codeforces526D)</a></h2><h3 id="题解-10"><a href="#题解-10" class="headerlink" title="题解"></a>题解</h3><p>hash或kmp</p>
+<h2 id="L-Corporate-Identity-HDU2328"><a href="#L-Corporate-Identity-HDU2328" class="headerlink" title="L - Corporate Identity (HDU2328)"></a>L - Corporate Identity <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2328" target="_blank" rel="noopener">(HDU2328)</a></h2><h3 id="题解-11"><a href="#题解-11" class="headerlink" title="题解"></a>题解</h3><h2 id="M-Count-the-string-HDU2328"><a href="#M-Count-the-string-HDU2328" class="headerlink" title="M - Count the string (HDU2328)"></a>M - Count the string <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2328" target="_blank" rel="noopener">(HDU2328)</a></h2><h3 id="题解-12"><a href="#题解-12" class="headerlink" title="题解"></a>题解</h3><h2 id="N-A-Secret-HDU6153"><a href="#N-A-Secret-HDU6153" class="headerlink" title="N - A Secret (HDU6153)"></a>N - A Secret <a href="http://acm.hdu.edu.cn/showproblem.php?pid=6153" target="_blank" rel="noopener">(HDU6153)</a></h2><h3 id="题解-13"><a href="#题解-13" class="headerlink" title="题解"></a>题解</h3><h2 id="O-Clairewd’s-message-HDU4300"><a href="#O-Clairewd’s-message-HDU4300" class="headerlink" title="O - Clairewd’s message (HDU4300)"></a>O - Clairewd’s message <a href="http://acm.hdu.edu.cn/showproblem.php?pid=4300" target="_blank" rel="noopener">(HDU4300)</a></h2><h3 id="题解-14"><a href="#题解-14" class="headerlink" title="题解"></a>题解</h3><h2 id="P-Immediate-Decodability-HDU1305"><a href="#P-Immediate-Decodability-HDU1305" class="headerlink" title="P - Immediate Decodability (HDU1305)"></a>P - Immediate Decodability <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1305" target="_blank" rel="noopener">(HDU1305)</a></h2><h3 id="题解-15"><a href="#题解-15" class="headerlink" title="题解"></a>题解</h3><h2 id="Q-Language-of-FatMouse-ZOJ1109"><a href="#Q-Language-of-FatMouse-ZOJ1109" class="headerlink" title="Q - Language of FatMouse (ZOJ1109)"></a>Q - Language of FatMouse <a href="http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1109" target="_blank" rel="noopener">(ZOJ1109)</a></h2><h3 id="题解-16"><a href="#题解-16" class="headerlink" title="题解"></a>题解</h3><h2 id="R-Keywords-Search-HDU2222"><a href="#R-Keywords-Search-HDU2222" class="headerlink" title="R - Keywords Search (HDU2222)"></a>R - Keywords Search <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2222" target="_blank" rel="noopener">(HDU2222)</a></h2><h3 id="题解-17"><a href="#题解-17" class="headerlink" title="题解"></a>题解</h3><h2 id="S-Theme-Section-HDU4763"><a href="#S-Theme-Section-HDU4763" class="headerlink" title="S - Theme Section (HDU4763)"></a>S - Theme Section <a href="http://acm.hdu.edu.cn/showproblem.php?pid=4763" target="_blank" rel="noopener">(HDU4763)</a></h2><h3 id="题解-18"><a href="#题解-18" class="headerlink" title="题解"></a>题解</h3><h2 id="T-Operand-ZOJ1014"><a href="#T-Operand-ZOJ1014" class="headerlink" title="T - Operand (ZOJ1014)"></a>T - Operand <a href="http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1014" target="_blank" rel="noopener">(ZOJ1014)</a></h2><h3 id="题解-19"><a href="#题解-19" class="headerlink" title="题解"></a>题解</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/algorithm/contest/Online/NEUQ2019-dataStruct/" rel="next" title="NEUQ-ACM 2019集训 数据结构 题解">
+                <i class="fa fa-chevron-left"></i> NEUQ-ACM 2019集训 数据结构 题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/algorithm/problem/data-struct/HDU6703/" rel="prev" title="HDU6703 - array">
+                HDU6703 - array <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xiaofeng19</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Median-String-Codeforces1144E"><span class="nav-number">1.</span> <span class="nav-text">A - Median String (Codeforces1144E)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">1.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-Different-is-Good-Codeforces672B"><span class="nav-number">2.</span> <span class="nav-text">B - Different is Good (Codeforces672B)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-1"><span class="nav-number">2.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-Ostap-and-Grasshopper-Codeforces735A"><span class="nav-number">3.</span> <span class="nav-text">C - Ostap and Grasshopper (Codeforces735A)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-2"><span class="nav-number">3.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D-Queries-on-a-String-Codeforces598B"><span class="nav-number">4.</span> <span class="nav-text">D - Queries on a String (Codeforces598B)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-3"><span class="nav-number">4.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-Comparing-Two-Long-Integers-Codeforces616A"><span class="nav-number">5.</span> <span class="nav-text">E - Comparing Two Long Integers (Codeforces616A)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-4"><span class="nav-number">5.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-Vasiliy’s-Multiset-Codeforces706D"><span class="nav-number">6.</span> <span class="nav-text">F - Vasiliy’s Multiset (Codeforces706D)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-5"><span class="nav-number">6.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-最长回文-HDU3068"><span class="nav-number">7.</span> <span class="nav-text">G - 最长回文 (HDU3068)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-6"><span class="nav-number">7.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#H-Girls’-research-HDU3294"><span class="nav-number">8.</span> <span class="nav-text">H - Girls’ research (HDU3294)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-7"><span class="nav-number">8.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-Palindrome-Degree-Codeforces7D"><span class="nav-number">9.</span> <span class="nav-text">I - Palindrome Degree (Codeforces7D)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-8"><span class="nav-number">9.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J-Petr-Codeforces113B"><span class="nav-number">10.</span> <span class="nav-text">J - Petr# (Codeforces113B)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-9"><span class="nav-number">10.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K-Om-Nom-and-Necklace-Codeforces526D"><span class="nav-number">11.</span> <span class="nav-text">K - Om Nom and Necklace (Codeforces526D)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-10"><span class="nav-number">11.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L-Corporate-Identity-HDU2328"><span class="nav-number">12.</span> <span class="nav-text">L - Corporate Identity (HDU2328)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-11"><span class="nav-number">12.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#M-Count-the-string-HDU2328"><span class="nav-number">13.</span> <span class="nav-text">M - Count the string (HDU2328)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-12"><span class="nav-number">13.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#N-A-Secret-HDU6153"><span class="nav-number">14.</span> <span class="nav-text">N - A Secret (HDU6153)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-13"><span class="nav-number">14.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-Clairewd’s-message-HDU4300"><span class="nav-number">15.</span> <span class="nav-text">O - Clairewd’s message (HDU4300)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-14"><span class="nav-number">15.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P-Immediate-Decodability-HDU1305"><span class="nav-number">16.</span> <span class="nav-text">P - Immediate Decodability (HDU1305)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-15"><span class="nav-number">16.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-Language-of-FatMouse-ZOJ1109"><span class="nav-number">17.</span> <span class="nav-text">Q - Language of FatMouse (ZOJ1109)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-16"><span class="nav-number">17.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R-Keywords-Search-HDU2222"><span class="nav-number">18.</span> <span class="nav-text">R - Keywords Search (HDU2222)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-17"><span class="nav-number">18.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S-Theme-Section-HDU4763"><span class="nav-number">19.</span> <span class="nav-text">S - Theme Section (HDU4763)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-18"><span class="nav-number">19.1.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T-Operand-ZOJ1014"><span class="nav-number">20.</span> <span class="nav-text">T - Operand (ZOJ1014)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-19"><span class="nav-number">20.1.</span> <span class="nav-text">题解</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaofeng19</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src>
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
