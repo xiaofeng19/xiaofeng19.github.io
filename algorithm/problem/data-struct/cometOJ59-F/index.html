@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="沿着网线爬">
 <meta property="og:description" content="题目题意">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-29T09:17:40.292Z">
+<meta property="og:updated_time" content="2019-10-11T11:44:28.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cometOJ contest59F - 三元组">
 <meta name="twitter:description" content="题目题意">
@@ -366,7 +366,7 @@
       
         <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://www.cometoj.com/contest/59/problem/F?problem_id=2681" target="_blank" rel="noopener">题目</a></h3><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><a id="more"></a>
 <h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>先钦定将$a_i+a_j$作为较小值，即去寻找符合$2\times (a_i+a_j)\le b_i+b_j$的三元组对</p>
-<p>所以我们就可以对每个三元组求出$p=b-2a$，问题，转化成求$p_i+p_j\ge 0$的三元组对，此时最终答案就只受到$p$和$c$的影响，就可以利用二位偏序的做法来解这道题了</p>
+<p>所以我们就可以对每个三元组求出$p=b-2a$，问题，转化成求$p_i+p_j\ge 0$的三元组对，此时最终答案就只受到$p$和$c$的影响，就可以利用二维偏序的做法来解这道题了</p>
 <p>先以$p$为关键字对三元组从大到小排个序，然后用树状数组或线段树维护$c$的和（这里用的线段树）。然后遍历排序后的三元组。</p>
 <p>当前三元组的$p_i$为非负数的时候，可以先将当前三元组扔进线段树里（题目中$i$可以等于$j$），由于此时线段树内所有三元组与当前三元组都有$p\ge 0$，即$p_i+p_j\ge 0$（$j$为线段树内任意三元组）恒成立，所以$ans$直接加上$c_i\times segtree_{root}$</p>
 <p>当前三元组的$p_i$为负数的时候，由于两个负数之和是不可能大于或等于$0$，所以不必扔到线段树内，然后区间查询$segtree_{p_i-maxp}$与$c_i$相乘就行</p>
